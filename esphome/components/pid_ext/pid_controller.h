@@ -14,6 +14,8 @@ struct PIDController {
 
   bool in_deadband();
 
+  bool in_integral_band();
+
   friend class PIDClimate;
 
  private:
@@ -36,6 +38,9 @@ struct PIDController {
   float ki_multiplier_ = 0.0f;
   float kd_multiplier_ = 0.0f;
   int deadband_output_samples_ = 1;
+
+  float integral_band_threshold_low_ = NAN;
+  float integral_band_threshold_high_ = NAN;
 
   float min_integral_ = NAN;
   float max_integral_ = NAN;

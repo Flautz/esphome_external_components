@@ -39,6 +39,9 @@ class PIDClimate : public climate::Climate, public Component {
 
   void set_deadband_output_samples(int in) { controller_.deadband_output_samples_ = in; }
 
+  void set_integral_band_threshold_low(float in) { controller_.integral_band_threshold_low_ = in; }
+  void set_integral_band_threshold_high(float in) { controller_.integral_band_threshold_high_ = in; }
+
   float get_output_value() const { return output_value_; }
   float get_error_value() const { return controller_.error_; }
   float get_kp() { return controller_.kp_; }

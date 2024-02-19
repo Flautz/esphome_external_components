@@ -32,6 +32,12 @@ bool PIDController::in_deadband() {
   return (threshold_low_ < err && err < threshold_high_);
 }
 
+bool PIDController::in_integral_band() {
+  float err = -error_;
+  return ((std::isnan(integral_band_threshold_low_) || integral_band_threshold_low_ < err) &&
+          (std::isnan(integral_band_threshold_high_) || err < integral_band_threshold_high_));
+}
+
 void PIDController::calculate_proportional_term_() {
   // p(t) := K_p * e(t)
   proportional_term_ = kp_ * error_;
@@ -58,6 +64,11 @@ void PIDController::calculate_integral_term_() {
     accumulated_integral_ += new_integral * ki_multiplier_;
   } else {
     accumulated_integral_ += new_integral;
+  }
+
+  // reset integral if outside integral band
+  if (!in_integral_band()) {
+    accumulated_integral_ = 0;
   }
 
   // constrain accumulated integral value

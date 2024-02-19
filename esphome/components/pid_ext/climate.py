@@ -40,6 +40,11 @@ CONF_KP_MULTIPLIER = "kp_multiplier"
 CONF_KI_MULTIPLIER = "ki_multiplier"
 CONF_KD_MULTIPLIER = "kd_multiplier"
 
+# Integration band parameters
+CONF_INTEGRAL_BAND_PARAMETERS = "integral_band_parameters"
+CONF_INTEGRAL_BAND_THRESHOLD_HIGH = "integral_band_threshold_high"
+CONF_INTEGRAL_BAND_THRESHOLD_LOW = "integral_band_threshold_low"
+
 CONFIG_SCHEMA = cv.All(
     climate.CLIMATE_SCHEMA.extend(
         {
@@ -59,6 +64,12 @@ CONFIG_SCHEMA = cv.All(
                     cv.Optional(
                         CONF_DEADBAND_OUTPUT_AVERAGING_SAMPLES, default=1
                     ): cv.int_,
+                }
+            ),
+            cv.Optional(CONF_INTEGRAL_BAND_PARAMETERS): cv.Schema(
+                {
+                    cv.Required(CONF_INTEGRAL_BAND_THRESHOLD_HIGH): cv.temperature,
+                    cv.Required(CONF_INTEGRAL_BAND_THRESHOLD_LOW): cv.temperature,
                 }
             ),
             cv.Required(CONF_CONTROL_PARAMETERS): cv.Schema(
@@ -121,6 +132,19 @@ async def to_code(config):
         cg.add(
             var.set_deadband_output_samples(
                 params[CONF_DEADBAND_OUTPUT_AVERAGING_SAMPLES]
+            )
+        )
+
+    if CONF_INTEGRAL_BAND_PARAMETERS in config:
+        params = config[CONF_INTEGRAL_BAND_PARAMETERS]
+        cg.add(
+            var.set_integral_band_threshold_low(
+                params[CONF_INTEGRAL_BAND_THRESHOLD_LOW]
+            )
+        )
+        cg.add(
+            var.set_integral_band_threshold_high(
+                params[CONF_INTEGRAL_BAND_THRESHOLD_HIGH]
             )
         )
 
