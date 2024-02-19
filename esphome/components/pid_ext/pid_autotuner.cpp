@@ -7,9 +7,9 @@
 #endif
 
 namespace esphome {
-namespace pid {
+namespace pid_ext {
 
-static const char *const TAG = "pid.autotune";
+static const char *const TAG = "pid_ext.autotune";
 
 /*
  * # PID Autotuner
@@ -357,5 +357,5 @@ bool PIDAutotuner::OscillationAmplitudeDetector::is_amplitude_convergent() const
   return (mean_amplitude - global_amplitude) / (global_amplitude) < 0.05f;
 }
 
-}  // namespace pid
+}  // namespace pid_ext
 }  // namespace esphome

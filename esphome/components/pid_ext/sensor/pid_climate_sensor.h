@@ -1,10 +1,10 @@
 #pragma once
 
 #include "esphome/core/component.h"
-#include "esphome/components/pid/pid_climate.h"
+#include "esphome/components/pid_ext/pid_climate.h"
 
 namespace esphome {
-namespace pid {
+namespace pid_ext {
 
 enum PIDClimateSensorType {
   PID_SENSOR_TYPE_RESULT,
@@ -33,5 +33,5 @@ class PIDClimateSensor : public sensor::Sensor, public Component {
   PIDClimateSensorType type_;
 };
 
-}  // namespace pid
+}  // namespace pid_ext
 }  // namespace esphome

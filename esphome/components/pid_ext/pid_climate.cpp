@@ -2,9 +2,9 @@
 #include "esphome/core/log.h"
 
 namespace esphome {
-namespace pid {
+namespace pid_ext {
 
-static const char *const TAG = "pid.climate";
+static const char *const TAG = "pid_ext.climate";
 
 void PIDClimate::setup() {
   this->sensor_->add_on_state_callback([this](float state) {
@@ -183,5 +183,5 @@ void PIDClimate::start_autotune(std::unique_ptr<PIDAutotuner> &&autotune) {
 
 void PIDClimate::reset_integral_term() { this->controller_.reset_accumulated_integral(); }
 
-}  // namespace pid
+}  // namespace pid_ext
 }  // namespace esphome

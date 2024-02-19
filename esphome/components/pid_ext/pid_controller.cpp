@@ -1,7 +1,7 @@
 #include "pid_controller.h"
 
 namespace esphome {
-namespace pid {
+namespace pid_ext {
 
 float PIDController::update(float setpoint, float process_value) {
   // e(t) ... error at timestamp t
@@ -125,5 +125,5 @@ float PIDController::calculate_relative_time_() {
   return dt / 1000.0f;
 }
 
-}  // namespace pid
+}  // namespace pid_ext
 }  // namespace esphome

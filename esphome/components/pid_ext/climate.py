@@ -4,7 +4,7 @@ from esphome import automation
 from esphome.components import climate, sensor, output
 from esphome.const import CONF_HUMIDITY_SENSOR, CONF_ID, CONF_SENSOR
 
-pid_ns = cg.esphome_ns.namespace("pid")
+pid_ns = cg.esphome_ns.namespace("pid_ext")
 PIDClimate = pid_ns.class_("PIDClimate", climate.Climate, cg.Component)
 PIDAutotuneAction = pid_ns.class_("PIDAutotuneAction", automation.Action)
 PIDResetIntegralTermAction = pid_ns.class_(
@@ -128,7 +128,7 @@ async def to_code(config):
 
 
 @automation.register_action(
-    "climate.pid.reset_integral_term",
+    "climate.pid_ext.reset_integral_term",
     PIDResetIntegralTermAction,
     automation.maybe_simple_id(
         {
@@ -142,7 +142,7 @@ async def pid_reset_integral_term(config, action_id, template_arg, args):
 
 
 @automation.register_action(
-    "climate.pid.autotune",
+    "climate.pid_ext.autotune",
     PIDAutotuneAction,
     automation.maybe_simple_id(
         {
@@ -167,7 +167,7 @@ async def esp8266_set_frequency_to_code(config, action_id, template_arg, args):
 
 
 @automation.register_action(
-    "climate.pid.set_control_parameters",
+    "climate.pid_ext.set_control_parameters",
     PIDSetControlParametersAction,
     automation.maybe_simple_id(
         {

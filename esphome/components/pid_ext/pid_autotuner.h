@@ -8,7 +8,7 @@
 #include <vector>
 
 namespace esphome {
-namespace pid {
+namespace pid_ext {
 
 class PIDAutotuner {
  public:
@@ -111,5 +111,5 @@ class PIDAutotuner {
   std::string id_;
 };
 
-}  // namespace pid
+}  // namespace pid_ext
 }  // namespace esphome
